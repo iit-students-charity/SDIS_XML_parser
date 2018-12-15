@@ -47,7 +47,6 @@ public class XmlDomParserTest {
 
         xmlDomParser.parse();
 
-        System.out.println(xmlDomParser.getDocument());
         assertEquals(expectd, xmlDomParser.getDocument().toString());
     }
 
