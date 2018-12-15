@@ -35,6 +35,11 @@ public class XmlTagTest {
     @Test
     public void testForTagWithAttrsAndValue() {
         String inputData = "<test value_1=\"some value 1\" value_2=\"some value 2\">\n\tbody of 'test' tag\n<test_2 value=\"hard test\" />\n</test>";
+        String expected = "<test value_1=\"some value 1\" value_2=\"some value 2\">\n" +
+                "\tbody of 'test' tag\n" +
+                "\t<test_2 value=\"hard test\">\n" +
+                "\t</test_2>\n" +
+                "</test>";
         XmlTag tag = null;
 
         while (tag == null || !tag.isClosedTag()) {
@@ -42,8 +47,7 @@ public class XmlTagTest {
             inputData = ElementFactory.XmlTagFactory.deleteElementFromContent(inputData);
         }
 
-        //System.out.println(tag);
-        System.out.println(tag.getParent());
+        assertEquals(expected, tag.toString());
     }
 
     @Test
@@ -61,6 +65,20 @@ public class XmlTagTest {
                 "\t\t<test_5 value=\"pizda\" />\n" +
                 "\t</test_4>\n" +
                 "</test>";
+        String expected = "<test value_1=\"some value 1\" value_2=\"some value 2\">\n" +
+                "\tbody of 'test' tag\n" +
+                "\t<test_2 value=\"hard test\">\n" +
+                "\t</test_2>\n" +
+                "\n" +
+                "\t<test_3 >\n" +
+                "\t\tbody of \"test_3\" tag\n" +
+                "\t</test_3>\n" +
+                "\n" +
+                "\t<test_4 >\n" +
+                "\t\t<test_5 value=\"pizda\">\n" +
+                "\t\t</test_5>\n" +
+                "\t</test_4>\n" +
+                "</test>";
         XmlTag tag = null;
         XmlTag daughter = null;
 
@@ -73,7 +91,6 @@ public class XmlTagTest {
             inputData = ElementFactory.XmlTagFactory.deleteElementFromContent(inputData);
         }
 
-        //System.out.println(tag);
-        System.out.println(daughter);
+        assertEquals(expected, daughter.toString());
     }
 }
