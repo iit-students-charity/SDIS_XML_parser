@@ -11,6 +11,21 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum ElementFactory {
+    XmlDeclarationFactory(null, "<\\?xml version=\"1.0\" \\?>") {
+        private static final int NUMBER_OF_REGEX = 0;
+        private static final String UNSUPPORTABLE_ERROR_ERROR_MESSAGE =
+                "This operation is not supported in XmlDeclarationFactory!";
+
+        @Override
+        public Object getInstance(String content, XmlElement parent) {
+            throw new UnsupportedOperationException(UNSUPPORTABLE_ERROR_ERROR_MESSAGE);
+        }
+
+        @Override
+        public String deleteElementFromContent(String content) {
+            return deleteElementFromContentSimpleVersion(regexs[NUMBER_OF_REGEX], content, NUMBER_OF_REGEX);
+        }
+    },
     XmlCommentFactory("This is not XmlComment!",
             "^(<!--([\\w|\\s|\\n|\\t|\\r|(|)|,|<|>|\\&|'|\"|\\*|%|;|\\.|\\-|+|=|\\\\|\\^|?|:|$|#|№|@|!]*)-->)") {
 
@@ -123,7 +138,9 @@ public enum ElementFactory {
                 tag.setAttrs((List<XmlAttr>) XmlAttrFactory.getInstance(content, tag));
                 tag.setClosedTag(true);
 
-                return tag;
+                return parent == null
+                    ? tag
+                    : parent;
             } else if (validation(regexs[NUMBER_OF_MULTI_LINE_REGEX], content)) {
                 return generateXmlTagObject(content, (XmlTag) parent);
             } else if (validation(regexs[NUMBER_OF_CLOSING_REGEX], content)) {
@@ -136,7 +153,8 @@ public enum ElementFactory {
                     throw  new IllegalArgumentException("Closing tag does not equal parent tag!");
                 }
             } else if (validation(regexs[NUMBER_OF_CONTENT_REGEX], content)){
-                parent.setData("\n\t" + getGroup(regexs[NUMBER_OF_CONTENT_REGEX], content, NUMBER_OF_FULL_REGEX_GROUP).trim());
+                parent.setData("\n\t" + Objects.requireNonNull(getGroup(regexs[NUMBER_OF_CONTENT_REGEX], content,
+                        NUMBER_OF_FULL_REGEX_GROUP)).trim());
 
                 return parent;
             } else {
@@ -155,7 +173,7 @@ public enum ElementFactory {
                 }
             }
 
-            return content.substring(deletingElement.length()).trim();
+            return content.substring(Objects.requireNonNull(deletingElement).length()).trim();
         }
     };
 

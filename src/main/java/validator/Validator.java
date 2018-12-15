@@ -10,8 +10,6 @@ public class Validator {
     }
 
     public static boolean validateOnCorrectXmlDocument(XmlDocument document) {
-        // TODO
-
-        return false;
+        return document.getRoot().isClosedTag();
     }
 }

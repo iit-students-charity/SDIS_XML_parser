@@ -8,6 +8,7 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -15,7 +16,7 @@ public class Reader {
     private static final String NEW_LINE = "\n";
 
     public static String readFileByPath(String path) throws URISyntaxException, IOException {
-        Path pathToFile = Paths.get(Reader.class.getClassLoader().getResource(path).toURI());
+        Path pathToFile = Paths.get(Objects.requireNonNull(Reader.class.getClassLoader().getResource(path)).toURI());
 
         Stream<String> lines = Files.lines(pathToFile);
         String data = lines.collect(Collectors.joining(NEW_LINE));

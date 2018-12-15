@@ -1,7 +1,7 @@
 package model;
 
 public class XmlDocument {
-    private final static String XML_DOCUMENT = "<?xml version=\"1.0\" ?>/n%s";
+    private final static String XML_DOCUMENT = "<?xml version=\"1.0\" ?>\n%s";
     private XmlTag root;
 
     public XmlTag getRoot() {
