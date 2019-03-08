@@ -3,7 +3,6 @@ package parser;
 import model.XmlTag;
 import org.junit.Test;
 import writer.Writer;
-
 import java.io.IOException;
 import java.net.URISyntaxException;
 import static org.junit.Assert.*;
@@ -86,7 +85,7 @@ public class XmlDomParserTest {
 
         assertEquals(expected, xmlDomParser.getDocument().toString());
 
-        Writer.write("C:\\Users\\Seareon\\Downloads\\wf-artifacts\\wf-artifacts\\XmlParser\\src\\main\\resources\\result_test1.xml",
+        Writer.write("D:/pivas_xml_lab/XmlParser/src/main/resources/result_test1.xml",
                 xmlDomParser.getDocument().toString());
     }
 
@@ -98,7 +97,7 @@ public class XmlDomParserTest {
                 "\tbody of 'test' tag\n" +
                 "\t<test_2 value=\"hard test\">\n" +
                 "\t\t<test_for_dv_2 >\n" +
-                "\t\t\tPlease, give me ten # 2))\n" +
+                "\t\t\tPizza\n" +
                 "\t\t</test_for_dv_2>\n" +
                 "\t</test_2>\n" +
                 "\n" +
@@ -124,24 +123,24 @@ public class XmlDomParserTest {
                 "\t\t<!-- test comment # 2 -->\n" +
                 "\t</test_4>\n" +
                 "\n" +
-                "\t<test_for_dv >\n" +
-                "\t\tPlease, give me ten))\n" +
-                "\t</test_for_dv>\n" +
+                "\t<test >\n" +
+                "\t\tIce-cream\n" +
+                "\t</test>\n" +
                 "</test>";
 
         xmlDomParser.parse();
 
         XmlTag tempTag = xmlDomParser.getDocument().getRoot();
         tempTag.setInnerElement(
-                new XmlTag("test_for_dv", "\n\tPlease, give me ten))", tempTag));
+                new XmlTag("test", "\n\tIce-cream", tempTag));
 
         tempTag = (XmlTag) xmlDomParser.getDocument().getRoot().getInnerElements().get(0);
         tempTag.setInnerElement(
-                new XmlTag("test_for_dv_2", "\n\tPlease, give me ten # 2))", tempTag));
+                new XmlTag("test_for_dv_2", "\n\tPizza", tempTag));
 
         assertEquals(expected, xmlDomParser.getDocument().toString());
 
-        Writer.write("C:\\Users\\Seareon\\Downloads\\wf-artifacts\\wf-artifacts\\XmlParser\\src\\main\\resources\\result_test2.xml",
+        Writer.write("D:/pivas_xml_lab/XmlParser/src/main/resources/result_test2.xml",
                 xmlDomParser.getDocument().toString());
     }
 }

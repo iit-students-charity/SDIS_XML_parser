@@ -117,6 +117,8 @@ public enum ElementFactory {
         private static final int NUMBER_OF_FULL_REGEX_GROUP = 1;
         private static final int NUMBER_OF_NAME_GROUP = 2;
 
+        private static final String ERROR_MESSAGE_FOR_NOT_EQUAL_CLOSING_TAG = "Closing tag does not equal parent tag!";
+
         private XmlTag generateXmlTagObject(String content, XmlTag parent) {
             String tagName = getGroup(regexs[NUMBER_OF_MULTI_LINE_REGEX], content, NUMBER_OF_NAME_GROUP);
             XmlTag tag = new XmlTag(tagName, "", parent);
@@ -150,7 +152,7 @@ public enum ElementFactory {
                     ((XmlTag)parent).setClosedTag(true);
                     return parent;
                 } else {
-                    throw  new IllegalArgumentException("Closing tag does not equal parent tag!");
+                    throw  new IllegalArgumentException(ERROR_MESSAGE_FOR_NOT_EQUAL_CLOSING_TAG);
                 }
             } else if (validation(regexs[NUMBER_OF_CONTENT_REGEX], content)){
                 parent.setData("\n\t" + Objects.requireNonNull(getGroup(regexs[NUMBER_OF_CONTENT_REGEX], content,

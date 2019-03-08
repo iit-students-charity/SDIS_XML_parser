@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<test value_1="some value 1" value_2="some value 2">
+	body of 'test' tag
+	<test_2 value="hard test">
+		<test_for_dv_2 >
+			Pizza
+		</test_for_dv_2>
+	</test_2>
+
+	<test_3 >
+		body of "test_3" tag
+	</test_3>
+
+	<!-- test comment #1 -->
+
+	<![CDATA[
+	        Within this Character Data block I can
+	        use double dashes as much as I want (along with <, &, ', and \")
+	        *and* %MyParamEntity; will be expanded to the text
+	        "Has been expanded" ... however, I can't use
+	        the CEND sequence. If I need to use CEND I must escape one of the
+	        brackets or the greater-than sign using concatenated CDATA sections.
+	    ]]>
+
+	<test_4 >
+		<test_5 value="some value for test_5 teg">
+		</test_5>
+	
+		<!-- test comment # 2 -->
+	</test_4>
+
+	<test >
+		Ice-cream
+	</test>
+</test>

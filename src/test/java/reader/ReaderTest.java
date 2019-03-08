@@ -17,8 +17,7 @@ public class ReaderTest {
 
     @Test
     public void testForReadingByInputStream() throws IOException {
-        String result =  Reader.readFileByStream(new FileInputStream("C:\\Users\\Seareon\\Downloads\\" +
-                "wf-artifacts\\wf-artifacts\\XmlParser\\src\\main\\resources\\test1.xml"));
+        String result =  Reader.readFileByStream(new FileInputStream("D:/pivas_xml_lab/XmlParser/src/main/resources/test1.xml"));
         String expected = "<?xml version=\"1.0\" ?>\n<test />";
 
         assertEquals(expected, result);

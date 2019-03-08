@@ -12,6 +12,7 @@ import java.net.URISyntaxException;
 public class XmlDomParser {
     private String content;
     private XmlDocument document;
+
     private static final String ERROR_MESSAGE_FOR_NOT_VALID_XML_DOCUMENT = "This not valid XML document!";
     private static final String ERROR_MESSAGE_FOR_FIRST_ELEMENT = "The first element is not tag!";
     private static final String ERROR_MESSAGE_FOR_NOT_CLOSED_TAG = "The XML document is not valid, " +
